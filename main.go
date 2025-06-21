@@ -9,17 +9,26 @@ import (
 const IMTPower = 2
 
 func main() {
+	defer func() {
+		r := recover()
+		if r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
+
 	fmt.Println("__Калькулятор индекса массы тела__")
 
 	for {
 		IMT, err := calculateIMT(getUserInput())
 
 		if err != nil {
-			fmt.Println(err)
-			if !checkRerun() {
-				break
-			}
-			continue
+			//fmt.Println(err)
+			//if !checkRerun() {
+			//	break
+			//}
+			//continue
+
+			panic(err)
 		}
 
 		printResult(IMT)
